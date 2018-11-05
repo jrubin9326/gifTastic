@@ -12,18 +12,28 @@
       // Function for rendering buttons to page
       function createButtons() {
 
-        $("#buttons-view").empty();
-
-        // Looping through the array of movies
+        // $("#buttonsAdded").empty();
         for (var i = 0; i < animals.length; i++) {
 
-          // Then dynamicaly generating buttons for each movie in the array
+          // dynamicaly generating buttons for each movie in the array
           var a = $("<button>");
           a.addClass("animal");
           a.attr("data-name",animals[i]);
           a.text(animals[i]);
-          $("#buttons-view").append(a);
+          $("#buttonsAdded").append(a);
         }
       }
 
+      $("#add-animal").on("click", function(event) {
+        event.preventDefault();
+    
+        var animal = $("#animal-input").val().trim();
+
+
+        animals.push(animal);
+
+        
+        createButtons();
+
+      });
       
