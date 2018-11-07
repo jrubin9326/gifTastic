@@ -6,7 +6,7 @@
       
 // function for getting gifs of animals
 $("#buttonsAdded").on("click", function() {
-    var animalName = $(this).attr("data-name")
+    var animalName = "zebra"
     console.log(animalName)
 
     var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=" + APIkey + "&q="+ animalName +"&limit=" + limit + "&rating=pg"
@@ -19,10 +19,10 @@ $("#buttonsAdded").on("click", function() {
         for(i = 0; i < response.data.length; i++) {
         
         var animalDiv = $("<div class = 'animalGif'>"); 
-        // var rating = response.data.rating
+        var rating = response.data[i].rating
         console.log(response)
-        // var ratingDisplay = $("<p>").text("Rating: "+ rating); 
-        // animalDiv.append(ratingDisplay); 
+        var ratingDisplay = $("<p>").text("Rating: "+ rating); 
+        animalDiv.append(ratingDisplay); 
         var imgURL = response.data[i].images.fixed_height_still.url
         var image = $("<img>").attr("src",imgURL);
         animalDiv.append(image); 
@@ -31,6 +31,8 @@ $("#buttonsAdded").on("click", function() {
 
     })
 })
+
+
        // Function for rendering buttons to page
       function createButtons() {
 
@@ -45,7 +47,7 @@ $("#buttonsAdded").on("click", function() {
           $("#buttonsAdded").append(a);
         }
       }
-// add on click event to push new animals to array
+// event for submit button when pressed to push new animals to array
       $("#add-animal").on("click", function(event) {
         event.preventDefault();
     
