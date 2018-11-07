@@ -5,24 +5,29 @@
       var limit = 10
       
 // function for getting gifs of animals
-$(document).on("click", function() {
-    var animalName = $(this).attr("data-name");
-    var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=" + APIkey + "&q="+animalName +"&limit=10&rating=pg"
+$("#buttonsAdded").on("click", function() {
+    var animalName = $(this).attr("data-name")
+    console.log(animalName)
 
+    var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=" + APIkey + "&q="+ animalName +"&limit=" + limit + "&rating=pg"
+    console.log(queryURL)
     $.ajax({
         url:queryURL, 
         method:"GET",
+  
     }).then(function(response){
+        for(i = 0; i < response.data.length; i++) {
+        
+        var animalDiv = $("<div class = 'animalGif'>"); 
+        // var rating = response.data.rating
         console.log(response)
-        // var animalDiv = $("<div class = 'animalGif'"); 
-        // var rating = response.Rating;
         // var ratingDisplay = $("<p>").text("Rating: "+ rating); 
         // animalDiv.append(ratingDisplay); 
-        // var imgURL = respose.Poster; 
-        // var image = $("<img>").attr("src",imgURL);
-        // animalDiv.append(image); 
-        // $("animalContent").prepend(animalDiv); 
-
+        var imgURL = response.data[i].images.fixed_height_still.url
+        var image = $("<img>").attr("src",imgURL);
+        animalDiv.append(image); 
+        $("#animalContent").append(animalDiv); 
+        }
 
     })
 })
